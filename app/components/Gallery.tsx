@@ -38,11 +38,11 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
                 <RoundedBox args={[0.82, 0.52, 0.05]} radius={0.05} smoothness={4}>
                     <meshPhysicalMaterial
                         color="#ffffff"
-                        transmission={0.8}
+                        transmission={0.99}
                         opacity={0.5}
                         transparent
-                        roughness={0.7}
-                        thickness={0.1}
+                        roughness={0.45}
+                        thickness={0.02}
                         clearcoat={1}
                         clearcoatRoughness={0.1}
                     />
