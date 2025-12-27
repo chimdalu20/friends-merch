@@ -24,18 +24,24 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
                 {...props}
             />
 
+            {/* Shadow */}
+            <mesh position={[0.02, -0.02, -0.01]}>
+                <planeGeometry args={[0.88, 0.58]} />
+                <meshBasicMaterial color="#000000" transparent opacity={0.1} />
+            </mesh>
+
             {/* 3D Card Geometry (Fixed to Image) */}
             <group position={[0, -1.5, 0.1]}>
 
 
                 {/* Card Background - Compact Badge Shape with Frost Effect */}
-                <RoundedBox args={[0.72, 0.52, 0.05]} radius={0.05} smoothness={4}>
+                <RoundedBox args={[0.82, 0.52, 0.05]} radius={0.05} smoothness={4}>
                     <meshPhysicalMaterial
                         color="#ffffff"
-                        transmission={0.95}
+                        transmission={0.8}
                         opacity={0.5}
                         transparent
-                        roughness={0.5}
+                        roughness={0.7}
                         thickness={0.1}
                         clearcoat={1}
                         clearcoatRoughness={0.1}
@@ -49,6 +55,8 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
                     color="#2a2a2a"
                     anchorX="center"
                     anchorY="middle"
+                    maxWidth={0.7}
+                    textAlign="center"
                 >
                     {title}
                 </Text>
@@ -60,19 +68,21 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
                     anchorX="center"
                     anchorY="middle"
                     letterSpacing={0.2}
+                    maxWidth={0.7}
+                    textAlign="center"
                 >
                     {subtitle.toUpperCase()}
                 </Text>
 
                 {/* Divider Line */}
                 <mesh position={[0, -0.05, 0.055]}>
-                    <planeGeometry args={[0.5, 0.002]} />
+                    <planeGeometry args={[0.6, 0.002]} />
                     <meshBasicMaterial color="#eeeeee" />
                 </mesh>
 
-                <group position={[0, -0.13, 0.055]}>
+                <group position={[0, -0.128, 0.05]}>
                     <Text
-                        position={[-0.1, 0, 0]}
+                        position={[-0.12, 0, 0]}
                         fontSize={0.08}
                         color="#1a1a1a"
                         anchorX="right"
@@ -82,13 +92,13 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
                         {price}
                     </Text>
                     <Text
-                        position={[0.1, 0, 0]}
+                        position={[0.12, 0, 0]}
                         fontSize={0.04}
                         color="#999999"
                         anchorX="left"
                         anchorY="middle"
                     >
-                        USD
+                        NGN
                     </Text>
                 </group>
             </group>
@@ -103,11 +113,21 @@ export default function Gallery() {
 
     // Total items
     const items = [
-        { url: "/friends-merch/images/1.jpg", title: "Clean Slate", subtitle: "The Beginning", price: "85.00" },
+        { url: "/friends-merch/images/1.jpg", title: "Clean Slates", subtitle: "The Beginning", price: "12,000" },
+        { url: "/friends-merch/images/2.jpg", title: "Courage", subtitle: "Dark Brown", price: "12,000" },
+        { url: "/friends-merch/images/3.jpg", title: "Lilac Dreams", subtitle: "Dark Purple", price: "12,000" },
+        { url: "/friends-merch/images/4.jpg", title: "Subtle Sophistication", subtitle: "Beige Pink", price: "7,000" },
+        { url: "/friends-merch/images/5.jpg", title: "Off-Duty Elegante", subtitle: "Off-White Hoodie", price: "13,000" },
+        { url: "/friends-merch/images/6.jpg", title: "Off-Duty Elegante", subtitle: "Black Hoodie", price: "13,000" },
+        { url: "/friends-merch/images/7.jpg", title: "Off-Duty Elegante", subtitle: "Pants", price: "15,000" },
+        { url: "/friends-merch/images/8.jpg", title: "Lilac Dreams (M)", subtitle: "Dark Purple", price: "12,000" },
+        { url: "/friends-merch/images/9.jpg", title: "Clean Slates (M)", subtitle: "Off-White", price: "12,000" },
+        { url: "/friends-merch/images/10.jpg", title: "Subtle Sophistication (M)", subtitle: "Beige", price: "12,000" },
+        { url: "/friends-merch/images/11.jpg", title: "Courage (M)", subtitle: "Beige Pink", price: "12,000" },
     ];
 
     // Spacing between items
-    const gap = 6;
+    const gap = 4;
     // Total width of the scrolling area
     const totalWidth = items.length * gap;
 
