@@ -11,9 +11,9 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
     const hoverScale = 1.05;
 
     useFrame((state, delta) => {
-        // Subtle float animation
+        // Subtle float animation (Reduced to minimum)
         if (group.current) {
-            group.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 0.5 + index) * 0.05;
+            group.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 0.5 + index) * 0.01;
         }
     });
 
@@ -30,9 +30,9 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
             />
 
             {/* The Label / Price Tag */}
-            {/* Positioned slightly offset from the image */}
-            <Html position={[1.5, 0, 0]} transform distanceFactor={1.5}>
-                <div className="product-card">
+            {/* Positioned below the image to bind them visually */}
+            <Html position={[0, -1.6, 0]} transform distanceFactor={1.5} center>
+                <div className="product-card" style={{ textAlign: 'center', width: '200px' }}>
                     <h2 className="product-title">{title}</h2>
                     <p className="product-subtitle">{subtitle}</p>
                     <div className="product-price">
