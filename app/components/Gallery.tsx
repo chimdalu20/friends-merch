@@ -28,18 +28,18 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
             <group position={[0, -1.5, 0.1]}>
                 {/* Shadow */}
                 <mesh position={[0.02, -0.02, -0.01]}>
-                    <planeGeometry args={[0.96, 0.56]} />
+                    <planeGeometry args={[0.78, 0.58]} />
                     <meshBasicMaterial color="#000000" transparent opacity={0.1} />
                 </mesh>
 
-                {/* Card Background - Further Reduced Size (0.8x) */}
-                <RoundedBox args={[0.88, 0.48, 0.05]} radius={0.04} smoothness={4}>
+                {/* Card Background - Compact Badge Shape */}
+                <RoundedBox args={[0.72, 0.52, 0.05]} radius={0.05} smoothness={4}>
                     <meshBasicMaterial color="#ffffff" />
                 </RoundedBox>
 
                 {/* Text Content */}
                 <Text
-                    position={[0, 0.096, 0.05]}
+                    position={[0, 0.11, 0.055]}
                     fontSize={0.096}
                     color="#2a2a2a"
                     anchorX="center"
@@ -49,7 +49,7 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
                 </Text>
 
                 <Text
-                    position={[0, 0.016, 0.05]}
+                    position={[0, 0.03, 0.055]}
                     fontSize={0.032}
                     color="#888888"
                     anchorX="center"
@@ -60,14 +60,14 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
                 </Text>
 
                 {/* Divider Line */}
-                <mesh position={[0, -0.064, 0.05]}>
-                    <planeGeometry args={[0.64, 0.002]} />
+                <mesh position={[0, -0.05, 0.055]}>
+                    <planeGeometry args={[0.5, 0.002]} />
                     <meshBasicMaterial color="#eeeeee" />
                 </mesh>
 
-                <group position={[0, -0.128, 0.05]}>
+                <group position={[0, -0.13, 0.055]}>
                     <Text
-                        position={[-0.12, 0, 0]}
+                        position={[-0.1, 0, 0]}
                         fontSize={0.08}
                         color="#1a1a1a"
                         anchorX="right"
@@ -77,7 +77,7 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
                         {price}
                     </Text>
                     <Text
-                        position={[0.12, 0, 0]}
+                        position={[0.1, 0, 0]}
                         fontSize={0.04}
                         color="#999999"
                         anchorX="left"
