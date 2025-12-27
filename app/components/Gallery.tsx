@@ -28,9 +28,18 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
             <group position={[0, -1.5, 0.1]}>
 
 
-                {/* Card Background - Compact Badge Shape */}
+                {/* Card Background - Compact Badge Shape with Frost Effect */}
                 <RoundedBox args={[0.72, 0.52, 0.05]} radius={0.05} smoothness={4}>
-                    <meshBasicMaterial color="#ffffff" />
+                    <meshPhysicalMaterial
+                        color="#ffffff"
+                        transmission={0.95}
+                        opacity={0.5}
+                        transparent
+                        roughness={0.5}
+                        thickness={0.1}
+                        clearcoat={1}
+                        clearcoatRoughness={0.1}
+                    />
                 </RoundedBox>
 
                 {/* Text Content */}
