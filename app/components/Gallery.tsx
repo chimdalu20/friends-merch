@@ -1,6 +1,6 @@
 'use client';
 
-import { Image, useScroll, Text } from '@react-three/drei';
+import { Image, useScroll, Text, RoundedBox } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useRef } from 'react';
 import * as THREE from 'three';
@@ -25,18 +25,23 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
             />
 
             {/* 3D Card Geometry (Fixed to Image) */}
-            <group position={[0, -1.5, 0.1]}>
-                {/* Card Background */}
-                <mesh position={[0, 0, 0]}>
-                    <planeGeometry args={[2.5, 1.2]} />
-                    <meshBasicMaterial color="#f0f0f0" transparent opacity={0.9} />
+            <group position={[0, -1.6, 0.1]}>
+                {/* Shadow */}
+                <mesh position={[0.05, -0.05, -0.01]}>
+                    <planeGeometry args={[2.1, 1.3]} />
+                    <meshBasicMaterial color="#000000" transparent opacity={0.1} />
                 </mesh>
+
+                {/* Card Background - Rounded White */}
+                <RoundedBox args={[2, 1.2, 0.05]} radius={0.1} smoothness={4}>
+                    <meshBasicMaterial color="#ffffff" />
+                </RoundedBox>
 
                 {/* Text Content */}
                 <Text
-                    position={[0, 0.3, 0.01]}
+                    position={[0, 0.25, 0.05]}
                     fontSize={0.25}
-                    color="#3a2a2a"
+                    color="#2a2a2a"
                     anchorX="center"
                     anchorY="middle"
                 >
@@ -44,21 +49,27 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
                 </Text>
 
                 <Text
-                    position={[0, 0.1, 0.01]}
-                    fontSize={0.1}
-                    color="#666"
+                    position={[0, 0.05, 0.05]}
+                    fontSize={0.08}
+                    color="#888888"
                     anchorX="center"
                     anchorY="middle"
-                    letterSpacing={0.1}
+                    letterSpacing={0.2}
                 >
                     {subtitle.toUpperCase()}
                 </Text>
 
-                <group position={[0, -0.25, 0.01]}>
+                {/* Divider Line */}
+                <mesh position={[0, -0.15, 0.05]}>
+                    <planeGeometry args={[1.5, 0.005]} />
+                    <meshBasicMaterial color="#eeeeee" />
+                </mesh>
+
+                <group position={[0, -0.3, 0.05]}>
                     <Text
-                        position={[-0.4, 0, 0]}
-                        fontSize={0.15}
-                        color="#000"
+                        position={[-0.3, 0, 0]}
+                        fontSize={0.18}
+                        color="#1a1a1a"
                         anchorX="right"
                         anchorY="middle"
                         fontWeight="bold"
@@ -66,9 +77,9 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
                         {price}
                     </Text>
                     <Text
-                        position={[0.4, 0, 0]}
+                        position={[0.3, 0, 0]}
                         fontSize={0.1}
-                        color="#888"
+                        color="#999999"
                         anchorX="left"
                         anchorY="middle"
                     >
