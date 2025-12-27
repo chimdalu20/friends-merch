@@ -52,10 +52,10 @@ export default function Gallery() {
 
     // Total items
     const items = [
-        { url: "/images/1.jpg", title: "Clean Slate", subtitle: "The Beginning", price: "85.00" },
-        { url: "/images/2.jpg", title: "Subtle Beige", subtitle: "Comfort Fit", price: "95.00" },
-        { url: "/images/3.jpg", title: "Deep Earth", subtitle: "Heavyweight Cotton", price: "110.00" },
-        { url: "/images/4.jpg", title: "Eternity", subtitle: "Signature Hoodie", price: "120.00" },
+        { url: "/friends-merch/images/1.jpg", title: "Clean Slate", subtitle: "The Beginning", price: "85.00" },
+        { url: "/friends-merch/images/2.jpg", title: "Subtle Beige", subtitle: "Comfort Fit", price: "95.00" },
+        { url: "/friends-merch/images/3.jpg", title: "Deep Earth", subtitle: "Heavyweight Cotton", price: "110.00" },
+        { url: "/friends-merch/images/4.jpg", title: "Eternity", subtitle: "Signature Hoodie", price: "120.00" },
     ];
 
     // Spacing between items

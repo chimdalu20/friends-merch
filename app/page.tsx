@@ -17,19 +17,17 @@ export default function Home() {
     const tl = gsap.timeline();
 
     // Intro Animation
-    // Intro Animation
-    tl.to(".intro-char", {
+    tl.to(titleRef.current, {
       opacity: 1,
       y: 0,
-      duration: 0.5,
-      ease: "back.out(1.7)",
-      stagger: 0.1,
-      delay: 0.2
+      duration: 1.5,
+      ease: "power3.out",
+      delay: 0.5
     })
       .to(introRef.current, {
         opacity: 0,
-        duration: 0.8,
-        delay: 0.5,
+        duration: 1,
+        delay: 1,
         onComplete: () => {
           if (introRef.current) introRef.current.style.display = 'none';
         }
@@ -62,24 +60,11 @@ export default function Home() {
             fontSize: '10vw',
             fontFamily: 'var(--font-playfair), serif',
             color: 'var(--deep-brown)',
-            display: 'flex',
-            gap: '0.2rem',
-            overflow: 'hidden'
+            opacity: 0,
+            transform: 'translateY(50px)'
           }}
         >
-          {"F.R.I.E.N.D.S".split("").map((char, i) => (
-            <span
-              key={i}
-              className="intro-char"
-              style={{
-                opacity: 0,
-                transform: 'translateY(50px)',
-                display: 'inline-block'
-              }}
-            >
-              {char}
-            </span>
-          ))}
+          CLEAN SLATES
         </h1>
       </div>
 
