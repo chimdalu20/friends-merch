@@ -25,9 +25,9 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
             />
 
             {/* The Label / Price Tag */}
-            {/* Positioned to the right of the image */}
-            <Html position={[1.75, 0, 0]} transform distanceFactor={1.5}>
-                <div className="product-card" style={{ textAlign: 'left', width: '250px' }}>
+            {/* Positioned at the bottom, overlapping the image slightly */}
+            <Html position={[0, -1.5, 0]} transform distanceFactor={1.5} center>
+                <div className="product-card" style={{ textAlign: 'center', width: '200px' }}>
                     <h2 className="product-title">{title}</h2>
                     <p className="product-subtitle">{subtitle}</p>
                     <div className="product-price">
@@ -48,9 +48,6 @@ export default function Gallery() {
     // Total items
     const items = [
         { url: "/friends-merch/images/1.jpg", title: "Clean Slate", subtitle: "The Beginning", price: "85.00" },
-        { url: "/friends-merch/images/2.jpg", title: "Subtle Beige", subtitle: "Comfort Fit", price: "95.00" },
-        { url: "/friends-merch/images/3.jpg", title: "Deep Earth", subtitle: "Heavyweight Cotton", price: "110.00" },
-        { url: "/friends-merch/images/4.jpg", title: "Eternity", subtitle: "Signature Hoodie", price: "120.00" },
     ];
 
     // Spacing between items
