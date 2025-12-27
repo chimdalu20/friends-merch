@@ -1,6 +1,6 @@
 'use client';
 
-import { Image, useScroll, Html } from '@react-three/drei';
+import { Image, useScroll, Text } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useRef } from 'react';
 import * as THREE from 'three';
@@ -24,18 +24,58 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
                 {...props}
             />
 
-            {/* The Label / Price Tag */}
-            {/* Positioned at the bottom, overlapping the image slightly */}
-            <Html position={[0, -1.5, 0]} transform distanceFactor={1.5} center>
-                <div className="product-card" style={{ textAlign: 'center', width: '200px' }}>
-                    <h2 className="product-title">{title}</h2>
-                    <p className="product-subtitle">{subtitle}</p>
-                    <div className="product-price">
-                        <span>{price}</span>
-                        <span className="currency">USD</span>
-                    </div>
-                </div>
-            </Html>
+            {/* 3D Card Geometry (Fixed to Image) */}
+            <group position={[0, -1.5, 0.1]}>
+                {/* Card Background */}
+                <mesh position={[0, 0, 0]}>
+                    <planeGeometry args={[2.5, 1.2]} />
+                    <meshBasicMaterial color="#f0f0f0" transparent opacity={0.9} />
+                </mesh>
+
+                {/* Text Content */}
+                <Text
+                    position={[0, 0.3, 0.01]}
+                    fontSize={0.25}
+                    color="#3a2a2a"
+                    anchorX="center"
+                    anchorY="middle"
+                >
+                    {title}
+                </Text>
+
+                <Text
+                    position={[0, 0.1, 0.01]}
+                    fontSize={0.1}
+                    color="#666"
+                    anchorX="center"
+                    anchorY="middle"
+                    letterSpacing={0.1}
+                >
+                    {subtitle.toUpperCase()}
+                </Text>
+
+                <group position={[0, -0.25, 0.01]}>
+                    <Text
+                        position={[-0.4, 0, 0]}
+                        fontSize={0.15}
+                        color="#000"
+                        anchorX="right"
+                        anchorY="middle"
+                        fontWeight="bold"
+                    >
+                        {price}
+                    </Text>
+                    <Text
+                        position={[0.4, 0, 0]}
+                        fontSize={0.1}
+                        color="#888"
+                        anchorX="left"
+                        anchorY="middle"
+                    >
+                        USD
+                    </Text>
+                </group>
+            </group>
         </group>
     );
 }

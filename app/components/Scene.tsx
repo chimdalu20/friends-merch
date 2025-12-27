@@ -10,7 +10,7 @@ export default function Scene() {
         <Canvas
             gl={{ antialias: true, alpha: true }}
             dpr={[1, 1.5]}
-            camera={{ position: [0, 0, 5], fov: 50 }}
+            camera={{ position: [0, 0, 40], fov: 6 }}
             style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex: 1 }}
         >
             <Suspense fallback={null}>
