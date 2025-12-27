@@ -14,7 +14,7 @@ export default function Scene() {
             style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex: 1 }}
         >
             <Suspense fallback={null}>
-                <ScrollControls pages={5} damping={0.2} horizontal>
+                <ScrollControls pages={5} damping={0} horizontal>
                     <Gallery />
                 </ScrollControls>
             </Suspense>

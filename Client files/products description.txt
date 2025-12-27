@@ -1,0 +1,58 @@
+(1) Colour - Off-White 
+ Named - Clean-Slates
+ Tee- Shirt - 7000
+  Shorts - 5000
+
+
+(2) Courage
+Colour- Dark Brown 
+Tee- Shirt - 6999
+Short - 4999
+
+(3) Lilac Dreams
+Colour - Dark Purple 
+Tee Shirt - 6999
+Shorts - 4999
+
+
+(4) Subtle Sophistication
+      Colour - Beige Pink 
+      Top Shirt - 6999
+       Short - 4999
+       Hoodie - 12,000
+       Pants - 10,000
+
+(5) Off-Duty Elegante Hoodie 
+Colour - Off-White 
+Price - 13,000
+
+
+(6) Off-Duty Elegante Hoodie 
+      Colour - Black 
+      Price - 13,000
+
+(7) Off-Duty Elegante Pants 
+Colour - Available in all colours 
+Price - 15,000
+
+(8) Lilac Dreams (Male)
+Colour - Dark Purple 
+Tee Shirt - 6999
+Shorts - 4999
+
+(9) Colour - Off-White (Male)
+ Named - Clean-Slates
+ Tee- Shirt - 7000
+  Shorts - 5000
+
+(10) Subtle Sophistication (Male)
+      Colour - Beige  
+      Top Shirt - 6999
+       Short - 4999
+
+(11) Courage (Male)
+      Colour - Beige Pink 
+      Top Shirt - 6999
+       Short - 4999
+       Hoodie - 12,000
+       Pants - 10,000
