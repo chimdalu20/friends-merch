@@ -26,11 +26,7 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
 
             {/* 3D Card Geometry (Fixed to Image) */}
             <group position={[0, -1.5, 0.1]}>
-                {/* Shadow */}
-                <mesh position={[0.02, -0.02, -0.01]}>
-                    <planeGeometry args={[0.78, 0.58]} />
-                    <meshBasicMaterial color="#000000" transparent opacity={0.1} />
-                </mesh>
+
 
                 {/* Card Background - Compact Badge Shape */}
                 <RoundedBox args={[0.72, 0.52, 0.05]} radius={0.05} smoothness={4}>
