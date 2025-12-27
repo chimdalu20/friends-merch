@@ -25,22 +25,22 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
             />
 
             {/* 3D Card Geometry (Fixed to Image) */}
-            <group position={[0, -1.6, 0.1]}>
+            <group position={[0, -1.5, 0.1]}>
                 {/* Shadow */}
-                <mesh position={[0.05, -0.05, -0.01]}>
-                    <planeGeometry args={[2.1, 1.3]} />
+                <mesh position={[0.03, -0.03, -0.01]}>
+                    <planeGeometry args={[1.2, 0.7]} />
                     <meshBasicMaterial color="#000000" transparent opacity={0.1} />
                 </mesh>
 
-                {/* Card Background - Rounded White */}
-                <RoundedBox args={[2, 1.2, 0.05]} radius={0.1} smoothness={4}>
+                {/* Card Background - Reduced Size */}
+                <RoundedBox args={[1.1, 0.6, 0.05]} radius={0.05} smoothness={4}>
                     <meshBasicMaterial color="#ffffff" />
                 </RoundedBox>
 
                 {/* Text Content */}
                 <Text
-                    position={[0, 0.25, 0.05]}
-                    fontSize={0.25}
+                    position={[0, 0.12, 0.05]}
+                    fontSize={0.12}
                     color="#2a2a2a"
                     anchorX="center"
                     anchorY="middle"
@@ -49,8 +49,8 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
                 </Text>
 
                 <Text
-                    position={[0, 0.05, 0.05]}
-                    fontSize={0.08}
+                    position={[0, 0.02, 0.05]}
+                    fontSize={0.04}
                     color="#888888"
                     anchorX="center"
                     anchorY="middle"
@@ -60,15 +60,15 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
                 </Text>
 
                 {/* Divider Line */}
-                <mesh position={[0, -0.15, 0.05]}>
-                    <planeGeometry args={[1.5, 0.005]} />
+                <mesh position={[0, -0.08, 0.05]}>
+                    <planeGeometry args={[0.8, 0.003]} />
                     <meshBasicMaterial color="#eeeeee" />
                 </mesh>
 
-                <group position={[0, -0.3, 0.05]}>
+                <group position={[0, -0.16, 0.05]}>
                     <Text
-                        position={[-0.3, 0, 0]}
-                        fontSize={0.18}
+                        position={[-0.15, 0, 0]}
+                        fontSize={0.1}
                         color="#1a1a1a"
                         anchorX="right"
                         anchorY="middle"
@@ -77,8 +77,8 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
                         {price}
                     </Text>
                     <Text
-                        position={[0.3, 0, 0]}
-                        fontSize={0.1}
+                        position={[0.15, 0, 0]}
+                        fontSize={0.05}
                         color="#999999"
                         anchorX="left"
                         anchorY="middle"
