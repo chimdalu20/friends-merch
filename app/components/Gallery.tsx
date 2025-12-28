@@ -5,7 +5,7 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { useRef } from 'react';
 import * as THREE from 'three';
 
-function GalleryItem({ url, title, subtitle, price, index, position, scale = [1, 1.5, 1], ...props }: any) {
+function GalleryItem({ url, title, subtitle, price, index, position, scale = [1, 1.5, 1], groupScale = 1, ...props }: any) {
     const ref = useRef<THREE.Mesh>(null);
     const group = useRef<THREE.Group>(null);
     const hoverScale = 1.05;
@@ -13,7 +13,7 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
     // Removed Floating Animation
 
     return (
-        <group ref={group} position={position}>
+        <group ref={group} position={position} scale={[groupScale, groupScale, groupScale]}>
             {/* The Image */}
             <Image
                 ref={ref}
@@ -110,6 +110,7 @@ export default function Gallery() {
     const { width } = useThree((state) => state.viewport);
     const scroll = useScroll();
     const group = useRef<THREE.Group>(null);
+    const isHovered = useRef(false);
 
     // Total items
     const items = [
@@ -126,12 +127,27 @@ export default function Gallery() {
         { url: "/friends-merch/images/11.jpg", title: "Courage (M)", subtitle: "Beige Pink", price: "12,000" },
     ];
 
-    // Spacing between items
-    const gap = 4;
+    const isMobile = width < 4.8; // Mobile/Portrait threshold
+    const wrapperScale = isMobile ? 0.65 : 1; // 65% size on mobile
+    const gap = isMobile ? 2.5 : 4; // Tighter spacing on mobile
+
     // Total width of the scrolling area
     const totalWidth = items.length * gap;
 
-    useFrame(() => {
+    useFrame((state, delta) => {
+        // Auto-scroll: increment scrollLeft
+        if (scroll.el && !isHovered.current) {
+            // Adjust speed as needed (pixels per second)
+            const speed = 15;
+            scroll.el.scrollLeft += speed * delta;
+
+            // Simple loop: if we reach the end, jump to start
+            // (scrollWidth - clientWidth) is the max scroll position
+            if (scroll.el.scrollLeft >= scroll.el.scrollWidth - scroll.el.clientWidth - 5) {
+                scroll.el.scrollLeft = 0;
+            }
+        }
+
         if (group.current && scroll) {
             // Smooth scroll movement
             // We offset by a bit to start centered or slightly right
@@ -141,7 +157,12 @@ export default function Gallery() {
     });
 
     return (
-        <group ref={group} position={[1, 0, 0]}>
+        <group
+            ref={group}
+            position={[1, 0, 0]}
+            onPointerOver={() => { isHovered.current = true; }}
+            onPointerOut={() => { isHovered.current = false; }}
+        >
             {items.map((item, i) => (
                 <GalleryItem
                     key={i}
@@ -152,6 +173,7 @@ export default function Gallery() {
                     price={item.price}
                     position={[i * gap, 0, 0]}
                     scale={[2, 3, 1]} // Reduced size for better fitting
+                    groupScale={wrapperScale}
                 />
             ))}
         </group>

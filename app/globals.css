@@ -98,6 +98,26 @@ a {
   opacity: 0.6;
 }
 
+/* Fade Overlays */
+.fade-overlay {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 30vw;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.fade-overlay.left {
+  left: 0;
+  background: linear-gradient(to right, var(--clean-slate) 10%, transparent);
+}
+
+.fade-overlay.right {
+  right: 0;
+  background: linear-gradient(to left, var(--clean-slate) 10%, transparent);
+}
+
 /* Responsive Overrides */
 @media (max-width: 768px) {
   .product-card {
@@ -107,5 +127,10 @@ a {
 
   .product-title {
     font-size: 1.5rem;
+  }
+
+  /* Reduce fade size on mobile to prevent blocking content */
+  .fade-overlay {
+    width: 15vw;
   }
 }

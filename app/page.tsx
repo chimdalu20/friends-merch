@@ -43,6 +43,12 @@ export default function Home() {
       {/* 3D Scene Layer */}
       <Scene />
 
+      {/* Left Fade Overlay */}
+      <div className="fade-overlay left" />
+
+      {/* Right Fade Overlay */}
+      <div className="fade-overlay right" />
+
       {/* Intro Overlay */}
       <div
         ref={introRef}
