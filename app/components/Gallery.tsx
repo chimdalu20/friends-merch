@@ -5,15 +5,13 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { useRef } from 'react';
 import * as THREE from 'three';
 
-function GalleryItem({ url, title, subtitle, price, index, position, scale = [1, 1.5, 1], groupScale = 1, ...props }: any) {
+function GalleryItem({ url, title, subtitle, price, index, position, scale = [1, 1.5, 1], groupScale = 1, itemRef, ...props }: any) {
     const ref = useRef<THREE.Mesh>(null);
-    const group = useRef<THREE.Group>(null);
-    const hoverScale = 1.05;
 
-    // Removed Floating Animation
-
+    // position is only the initial placement - Gallery rewrites x every frame so
+    // each item can wrap around independently.
     return (
-        <group ref={group} position={position} scale={[groupScale, groupScale, groupScale]}>
+        <group ref={itemRef} position={position} scale={[groupScale, groupScale, groupScale]}>
             {/* The Image */}
             <Image
                 ref={ref}
@@ -109,8 +107,14 @@ function GalleryItem({ url, title, subtitle, price, index, position, scale = [1,
 export default function Gallery() {
     const { width } = useThree((state) => state.viewport);
     const scroll = useScroll();
-    const group = useRef<THREE.Group>(null);
+    const itemRefs = useRef<(THREE.Group | null)[]>([]);
     const isHovered = useRef(false);
+
+    // The carousel's position is a single continuous number that only ever grows.
+    // It is deliberately NOT derived from scroll.el.scrollLeft: a DOM scroller has
+    // two ends, and anything driven by its absolute position inherits them.
+    const offset = useRef(0);
+    const lastScrollLeft = useRef<number | null>(null);
 
     // Total items
     const items = [
@@ -131,34 +135,64 @@ export default function Gallery() {
     const wrapperScale = isMobile ? 0.65 : 1; // 65% size on mobile
     const gap = isMobile ? 2.5 : 4; // Tighter spacing on mobile
 
-    // Total width of the scrolling area
+    // One full cycle of the carousel. Item i sits at i * gap, so after totalWidth
+    // the sequence repeats exactly - which is what lets it wrap seamlessly.
     const totalWidth = items.length * gap;
 
     useFrame((state, delta) => {
-        // Auto-scroll: increment scrollLeft
-        if (scroll.el && !isHovered.current) {
-            // Adjust speed as needed (pixels per second)
-            const speed = 15;
-            scroll.el.scrollLeft += speed * delta;
+        const el = scroll.el;
+        if (!el) return;
 
-            // Simple loop: if we reach the end, jump to start
-            // (scrollWidth - clientWidth) is the max scroll position
-            if (scroll.el.scrollLeft >= scroll.el.scrollWidth - scroll.el.clientWidth - 5) {
-                scroll.el.scrollLeft = 0;
-            }
+        const maxScroll = el.scrollWidth - el.clientWidth;
+        if (maxScroll <= 0) return;
+
+        // World units per pixel of DOM scroll, derived exactly as the old absolute
+        // mapping was, so dragging keeps the feel it had.
+        const unitsPerPixel = (totalWidth - width) / maxScroll;
+
+        if (lastScrollLeft.current === null) {
+            // Park the scroller in the middle so there is room to drag either way
+            // from the very first frame.
+            el.scrollLeft = maxScroll / 2;
+            lastScrollLeft.current = el.scrollLeft;
         }
 
-        if (group.current && scroll) {
-            // Smooth scroll movement
-            // We offset by a bit to start centered or slightly right
-            const x = -scroll.offset * (totalWidth - width);
-            group.current.position.x = x;
+        // 1. The user's scroll, consumed as a DELTA.
+        offset.current += (el.scrollLeft - lastScrollLeft.current) * unitsPerPixel;
+        lastScrollLeft.current = el.scrollLeft;
+
+        // 2. Idle drift, paused on hover.
+        if (!isHovered.current) {
+            offset.current += 15 * unitsPerPixel * delta;
+        }
+
+        // 3. Recentre the scroller before it can reach either end, so the user never
+        //    runs out of scroll in either direction. This is invisible precisely
+        //    because nothing on screen is positioned from scrollLeft.
+        const edge = maxScroll * 0.15;
+        if (el.scrollLeft < edge || el.scrollLeft > maxScroll - edge) {
+            el.scrollLeft = maxScroll / 2;
+            lastScrollLeft.current = el.scrollLeft;
+        }
+
+        // 4. Fold every item into the window centred on the camera. An item that
+        //    walks off one side re-enters on the other, totalWidth away - far off
+        //    screen, so the jump is never seen. This is the endlessness.
+        const half = totalWidth / 2;
+        for (let i = 0; i < items.length; i++) {
+            const item = itemRefs.current[i];
+            if (!item) continue;
+            // JS % keeps the sign of the dividend, so a negative result needs a lift
+            // back into range before folding.
+            let x = (i * gap - offset.current) % totalWidth;
+            if (x < 0) x += totalWidth;
+            if (x > half) x -= totalWidth;
+            item.position.x = x;
         }
     });
 
     return (
         <group
-            ref={group}
             position={[1, 0, 0]}
             onPointerOver={() => { isHovered.current = true; }}
             onPointerOut={() => { isHovered.current = false; }}
@@ -167,6 +201,7 @@ export default function Gallery() {
                 <GalleryItem
                     key={i}
                     index={i}
+                    itemRef={(el: THREE.Group | null) => { itemRefs.current[i] = el; }}
                     url={item.url}
                     title={item.title}
                     subtitle={item.subtitle}
