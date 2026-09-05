@@ -114,17 +114,17 @@ export default function Gallery() {
 
     // Total items
     const items = [
-        { url: "/friends-merch/images/1.jpg", title: "Clean Slates", subtitle: "The Beginning", price: "12,000" },
-        { url: "/friends-merch/images/2.jpg", title: "Courage", subtitle: "Dark Brown", price: "12,000" },
-        { url: "/friends-merch/images/3.jpg", title: "Lilac Dreams", subtitle: "Dark Purple", price: "12,000" },
-        { url: "/friends-merch/images/4.jpg", title: "Subtle Sophistication", subtitle: "Beige Pink", price: "7,000" },
-        { url: "/friends-merch/images/5.jpg", title: "Off-Duty Elegante", subtitle: "Off-White Hoodie", price: "13,000" },
-        { url: "/friends-merch/images/6.jpg", title: "Off-Duty Elegante", subtitle: "Black Hoodie", price: "13,000" },
-        { url: "/friends-merch/images/7.jpg", title: "Off-Duty Elegante", subtitle: "Pants", price: "15,000" },
-        { url: "/friends-merch/images/8.jpg", title: "Lilac Dreams (M)", subtitle: "Dark Purple", price: "12,000" },
-        { url: "/friends-merch/images/9.jpg", title: "Clean Slates (M)", subtitle: "Off-White", price: "12,000" },
-        { url: "/friends-merch/images/10.jpg", title: "Subtle Sophistication (M)", subtitle: "Beige", price: "12,000" },
-        { url: "/friends-merch/images/11.jpg", title: "Courage (M)", subtitle: "Beige Pink", price: "12,000" },
+        { url: "/images/1.jpg", title: "Clean Slates", subtitle: "The Beginning", price: "12,000" },
+        { url: "/images/2.jpg", title: "Courage", subtitle: "Dark Brown", price: "12,000" },
+        { url: "/images/3.jpg", title: "Lilac Dreams", subtitle: "Dark Purple", price: "12,000" },
+        { url: "/images/4.jpg", title: "Subtle Sophistication", subtitle: "Beige Pink", price: "7,000" },
+        { url: "/images/5.jpg", title: "Off-Duty Elegante", subtitle: "Off-White Hoodie", price: "13,000" },
+        { url: "/images/6.jpg", title: "Off-Duty Elegante", subtitle: "Black Hoodie", price: "13,000" },
+        { url: "/images/7.jpg", title: "Off-Duty Elegante", subtitle: "Pants", price: "15,000" },
+        { url: "/images/8.jpg", title: "Lilac Dreams (M)", subtitle: "Dark Purple", price: "12,000" },
+        { url: "/images/9.jpg", title: "Clean Slates (M)", subtitle: "Off-White", price: "12,000" },
+        { url: "/images/10.jpg", title: "Subtle Sophistication (M)", subtitle: "Beige", price: "12,000" },
+        { url: "/images/11.jpg", title: "Courage (M)", subtitle: "Beige Pink", price: "12,000" },
     ];
 
     const isMobile = width < 4.8; // Mobile/Portrait threshold
